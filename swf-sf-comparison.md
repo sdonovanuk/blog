@@ -88,7 +88,7 @@ private static StateMachine uploadBatchStateMachine() {
                     .defaultStateName("Upload Part"))
                 // Upload the current part.
                 .state("Upload Part", taskState()
-                    .resource("arn:aws:states:us-west-2:381710950421:activity:UploadS3Part")
+                    .resource("arn:aws:states:us-west-2:XXXXXXXXXXXX:activity:UploadS3Part")
                     .transition(next("Check Batch Completion")))
                 .state("Upload Batch Complete", passState().transition(end())))
             .catcher(catcher()
@@ -98,11 +98,11 @@ private static StateMachine uploadBatchStateMachine() {
         )
         // Child state-machine has failed, notify parent state-machine.
         .state("Child Flow Failed", taskState()
-            .resource("arn:aws:states:us-west-2:381710950421:activity:ChildWorkflowFailed")
+            .resource("arn:aws:states:us-west-2:XXXXXXXXXXXX:activity:ChildWorkflowFailed")
             .transition(end()))
         // Child state-machine is complete, notify parent state-machine.
         .state("Child Flow Successful", taskState()
-            .resource("arn:aws:states:us-west-2:381710950421:activity:ChildWorkflowSuccessful")
+            .resource("arn:aws:states:us-west-2:XXXXXXXXXXXX:activity:ChildWorkflowSuccessful")
             .transition(end()))
         .build();
 }
